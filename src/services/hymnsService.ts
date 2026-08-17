@@ -35,7 +35,7 @@ export const hymnalIcons: Record<HymnalId, string> = {
 }
 
 export const hymnalLogos: Partial<Record<HymnalId, string>> = {
-  preciosas: '/preciosas-logo.jpg',
+  preciosas: `${import.meta.env.BASE_URL}preciosas-logo.jpg`,
 }
 
 export const hymnalSlugs: Record<HymnalId, string> = {
