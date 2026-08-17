@@ -9,6 +9,23 @@ import { useFavoritesStore } from '../../store/useFavoritesStore'
 import { shareContent } from '../../utils/share'
 import type { HymnalId } from '../../types'
 
+function LyricsText({ lyrics }: { lyrics: string }) {
+  const parts = lyrics.split('**')
+  return (
+    <>
+      {parts.map((part, i) =>
+        i % 2 === 1 ? (
+          <strong key={i} className="font-bold">
+            {part}
+          </strong>
+        ) : (
+          <span key={i}>{part}</span>
+        ),
+      )}
+    </>
+  )
+}
+
 export function HymnDetailPage({ hymnalId }: { hymnalId: HymnalId }) {
   const { id } = useParams<{ id: string }>()
   const { data: hymn, loading, error } = useAsync(() => getHymn(hymnalId, id!), [hymnalId, id])
@@ -47,7 +64,7 @@ export function HymnDetailPage({ hymnalId }: { hymnalId: HymnalId }) {
               A+
             </button>
             <button
-              onClick={() => shareContent({ title: hymn.title, text: hymn.lyrics, url: location.href })}
+              onClick={() => shareContent({ title: hymn.title, text: hymn.lyrics.replace(/\*\*/g, ''), url: location.href })}
               className="ml-auto rounded-full border border-border px-4 py-1.5 text-sm font-medium text-text active:scale-95"
             >
               📤 Compartilhar
@@ -58,7 +75,7 @@ export function HymnDetailPage({ hymnalId }: { hymnalId: HymnalId }) {
             className="mt-5 whitespace-pre-line leading-relaxed text-text"
             style={{ fontSize: `${fontScale}rem` }}
           >
-            {hymn.lyrics}
+            <LyricsText lyrics={hymn.lyrics} />
           </p>
         </div>
       )}
