@@ -20,14 +20,14 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
 
         <Route path="/harpa" element={<HymnalListPage hymnalId="harpa" basePath="/harpa" />} />
-        <Route path="/harpa/:id" element={<HymnDetailPage hymnalId="harpa" />} />
+        <Route path="/harpa/:id" element={<HymnDetailPage hymnalId="harpa" basePath="/harpa" />} />
         <Route path="/preciosas" element={<HymnalListPage hymnalId="preciosas" basePath="/preciosas" />} />
-        <Route path="/preciosas/:id" element={<HymnDetailPage hymnalId="preciosas" />} />
+        <Route path="/preciosas/:id" element={<HymnDetailPage hymnalId="preciosas" basePath="/preciosas" />} />
         <Route
           path="/geracao-life"
           element={<HymnalListPage hymnalId="geracaoLife" basePath="/geracao-life" />}
         />
-        <Route path="/geracao-life/:id" element={<HymnDetailPage hymnalId="geracaoLife" />} />
+        <Route path="/geracao-life/:id" element={<HymnDetailPage hymnalId="geracaoLife" basePath="/geracao-life" />} />
 
         <Route path="/biblia" element={<BibleBooksPage />} />
         <Route path="/biblia/:book" element={<BibleChaptersPage />} />

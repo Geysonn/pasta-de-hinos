@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Header } from '../../components/Header'
-import { Logo } from '../../components/Logo'
 import {
   listHymns,
   hymnalLabels,
@@ -12,6 +11,13 @@ import {
   allHymnalIds,
 } from '../../services/hymnsService'
 import type { HymnalId } from '../../types'
+
+function greeting() {
+  const h = new Date().getHours()
+  if (h < 12) return 'Bom dia'
+  if (h < 18) return 'Boa tarde'
+  return 'Boa noite'
+}
 
 export function HomePage() {
   const [counts, setCounts] = useState<Partial<Record<HymnalId, number>>>({})
@@ -33,17 +39,17 @@ export function HomePage() {
 
   return (
     <div>
-      <Header title="Pasta de Hinos" subtitle="Toque numa pasta para abrir" />
+      <Header title="Minha Igreja" />
 
-      <div className="flex flex-col items-center gap-2 px-4 pt-6 pb-2 text-center">
-        <Logo size={56} />
-        <h1 className="text-lg font-bold text-text">Suas pastas de hinos</h1>
-        <p className="max-w-xs text-sm text-text-muted">
-          O mesmo conteúdo das pastas físicas, sempre no seu bolso.
-        </p>
+      <div className="px-4 pb-2 pt-2">
+        <h1 className="text-2xl font-bold text-text">{greeting()}</h1>
+        <p className="mt-1 text-sm text-text-muted">Hinos e Bíblia, sempre com você.</p>
       </div>
 
-      <div className="flex flex-col gap-3 px-4 py-4">
+      <div className="px-4 pb-2 pt-4">
+        <p className="mb-2 px-1 text-xs font-semibold uppercase tracking-wide text-text-muted">Pastas de hinos</p>
+      </div>
+      <div className="flex flex-col gap-3 px-4 pb-4">
         {allHymnalIds.map((id) => {
           const count = counts[id]
           const empty = count === 0
@@ -51,7 +57,7 @@ export function HomePage() {
             <Link
               key={id}
               to={`/${hymnalSlugs[id]}`}
-              className="flex items-center gap-3 rounded-2xl border border-border bg-surface px-4 py-4 shadow-sm transition active:scale-[0.98]"
+              className="flex items-center gap-3 rounded-2xl bg-surface px-4 py-4 transition active:scale-[0.98]"
             >
               {hymnalLogos[id] ? (
                 <img

@@ -18,14 +18,14 @@
 }
 
 [data-theme="dark"] {
-  --color-bg: #0f1015;
-  --color-surface: #181a22;
-  --color-surface-alt: #1f2129;
-  --color-border: #2b2e3a;
-  --color-text: #f1f0ee;
-  --color-text-muted: #a1a1ac;
-  --color-primary: #d1495a;
-  --color-primary-hover: #e05c6d;
+  --color-bg: #050505;
+  --color-surface: #18181b;
+  --color-surface-alt: #232326;
+  --color-border: #2c2c30;
+  --color-text: #f5f4f2;
+  --color-text-muted: #9a9aa2;
+  --color-primary: #e0495c;
+  --color-primary-hover: #ef5d70;
   --color-primary-soft: #3a1c22;
   --color-accent: #d4a94a;
   --color-success: #4fae76;

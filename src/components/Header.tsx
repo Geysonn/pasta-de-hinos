@@ -7,15 +7,15 @@ interface Props {
   onBack?: () => void
 }
 
-export function Header({ title = 'Pasta de Hinos', subtitle, showBack, onBack }: Props) {
+export function Header({ title = 'Minha Igreja', subtitle, showBack, onBack }: Props) {
   return (
-    <header className="sticky top-0 z-30 border-b border-border bg-surface/95 px-4 py-3 backdrop-blur">
+    <header className="sticky top-0 z-30 bg-bg px-4 pb-2 pt-4">
       <div className="mx-auto flex max-w-md items-center gap-3">
         {showBack ? (
           <button
             onClick={onBack}
             aria-label="Voltar"
-            className="flex h-9 w-9 items-center justify-center rounded-full text-text active:scale-95"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-surface text-text active:scale-95"
           >
             ←
           </button>
@@ -23,7 +23,7 @@ export function Header({ title = 'Pasta de Hinos', subtitle, showBack, onBack }:
           <Logo size={34} />
         )}
         <div className="min-w-0 flex-1">
-          <p className="truncate font-semibold leading-tight text-text">{title}</p>
+          <p className="truncate text-xl font-bold leading-tight text-text">{title}</p>
           {subtitle && <p className="truncate text-xs text-text-muted">{subtitle}</p>}
         </div>
       </div>

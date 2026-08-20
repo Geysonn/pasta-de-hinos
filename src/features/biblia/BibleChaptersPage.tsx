@@ -25,7 +25,7 @@ export function BibleChaptersPage() {
               <Link
                 key={n}
                 to={`/biblia/${meta.abbrev}/${n}`}
-                className="flex aspect-square items-center justify-center rounded-xl border border-border bg-surface text-sm font-semibold text-text transition active:scale-[0.95]"
+                className="flex aspect-square items-center justify-center rounded-2xl bg-surface text-sm font-semibold text-text transition active:scale-[0.95]"
               >
                 {n}
               </Link>

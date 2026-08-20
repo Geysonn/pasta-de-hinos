@@ -23,8 +23,8 @@ export function SettingsPage() {
             <button
               key={opt.value}
               onClick={() => setTheme(opt.value)}
-              className={`flex-1 rounded-xl border py-2.5 text-sm font-medium transition ${
-                theme === opt.value ? 'border-primary bg-primary-soft text-primary' : 'border-border text-text-muted'
+              className={`flex-1 rounded-full py-2.5 text-sm font-medium transition ${
+                theme === opt.value ? 'bg-primary text-white' : 'bg-surface text-text-muted'
               }`}
             >
               {opt.label}
@@ -36,14 +36,14 @@ export function SettingsPage() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setFontScale(fontScale - 0.1)}
-            className="h-10 w-10 rounded-full border border-border text-sm font-medium text-text active:scale-95"
+            className="h-10 w-10 rounded-full bg-surface text-sm font-medium text-text active:scale-95"
           >
             A-
           </button>
           <span className="text-sm text-text-muted">{Math.round(fontScale * 100)}%</span>
           <button
             onClick={() => setFontScale(fontScale + 0.1)}
-            className="h-10 w-10 rounded-full border border-border text-sm font-medium text-text active:scale-95"
+            className="h-10 w-10 rounded-full bg-surface text-sm font-medium text-text active:scale-95"
           >
             A+
           </button>
@@ -51,8 +51,8 @@ export function SettingsPage() {
 
         <h2 className="mt-6 mb-2 text-sm font-semibold text-text-muted">Sobre</h2>
         <p className="text-sm text-text-muted">
-          Pasta de Hinos reúne, em um só lugar no celular, os cadernos de hinos usados nos cultos e reuniões —
-          começando pela pasta do Círculo de Oração JD América. Funciona offline, como uma pasta física digital.
+          Minha Igreja reúne, em um só lugar no celular, os cadernos de hinos usados nos cultos e reuniões e a
+          Bíblia — começando pela pasta do Círculo de Oração JD América. Funciona offline, como um app de igreja.
         </p>
       </div>
     </div>

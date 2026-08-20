@@ -6,7 +6,7 @@ interface Props {
 
 export function SearchInput({ value, onChange, placeholder = 'Pesquisar…' }: Props) {
   return (
-    <div className="flex items-center gap-2 rounded-xl border border-border bg-surface px-3 py-2.5">
+    <div className="flex items-center gap-2 rounded-full bg-surface px-4 py-3">
       <span aria-hidden className="text-text-muted">
         🔎
       </span>

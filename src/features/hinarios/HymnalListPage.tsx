@@ -37,7 +37,7 @@ export function HymnalListPage({ hymnalId, basePath }: { hymnalId: HymnalId; bas
             <Link
               key={h.id}
               to={`${basePath}/${h.id}`}
-              className="flex items-center gap-3 rounded-xl border border-border bg-surface px-3 py-2.5 transition active:scale-[0.98]"
+              className="flex items-center gap-3 rounded-2xl bg-surface px-3 py-3 transition active:scale-[0.98]"
             >
               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary-soft text-sm font-bold text-primary">
                 {h.number}
