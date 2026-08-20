@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 
 const items = [
   { to: '/', label: 'Pastas', icon: '🗂️', end: true },
+  { to: '/biblia', label: 'Bíblia', icon: '📖' },
   { to: '/favoritos', label: 'Favoritos', icon: '⭐' },
   { to: '/configuracoes', label: 'Ajustes', icon: '⚙️' },
 ]
@@ -9,7 +10,7 @@ const items = [
 export function BottomNav() {
   return (
     <nav className="safe-bottom fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-surface/95 backdrop-blur">
-      <div className="mx-auto grid max-w-md grid-cols-3">
+      <div className="mx-auto grid max-w-md grid-cols-4">
         {items.map((item) => (
           <NavLink
             key={item.to}

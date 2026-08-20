@@ -7,6 +7,9 @@ import { HymnalListPage } from './features/hinarios/HymnalListPage'
 import { HymnDetailPage } from './features/hinarios/HymnDetailPage'
 import { FavoritesPage } from './features/favoritos/FavoritesPage'
 import { SettingsPage } from './features/configuracoes/SettingsPage'
+import { BibleBooksPage } from './features/biblia/BibleBooksPage'
+import { BibleChaptersPage } from './features/biblia/BibleChaptersPage'
+import { BibleReadingPage } from './features/biblia/BibleReadingPage'
 
 export default function App() {
   useThemeEffect()
@@ -25,6 +28,10 @@ export default function App() {
           element={<HymnalListPage hymnalId="geracaoLife" basePath="/geracao-life" />}
         />
         <Route path="/geracao-life/:id" element={<HymnDetailPage hymnalId="geracaoLife" />} />
+
+        <Route path="/biblia" element={<BibleBooksPage />} />
+        <Route path="/biblia/:book" element={<BibleChaptersPage />} />
+        <Route path="/biblia/:book/:chapter" element={<BibleReadingPage />} />
 
         <Route path="/favoritos" element={<FavoritesPage />} />
         <Route path="/configuracoes" element={<SettingsPage />} />
