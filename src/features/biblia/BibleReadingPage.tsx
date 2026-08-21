@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useParams, useNavigate, Navigate, Link } from 'react-router-dom'
 import { LoadingSpinner } from '../../components/Loading'
 import { ErrorState } from '../../components/ErrorState'
@@ -8,6 +8,7 @@ import { bibleBookByAbbrev } from '../../data/bibleBooks'
 import { useAppStore } from '../../store/useAppStore'
 import { useFavoritesStore } from '../../store/useFavoritesStore'
 import { useNotesStore } from '../../store/useNotesStore'
+import { useUiStore } from '../../store/useUiStore'
 import { shareContent } from '../../utils/share'
 
 export function BibleReadingPage() {
@@ -27,6 +28,9 @@ export function BibleReadingPage() {
   const [selected, setSelected] = useState<number | null>(null)
   const [noteDraft, setNoteDraft] = useState('')
   const [editingNote, setEditingNote] = useState(false)
+  const [chromeHidden, setChromeHidden] = useState(false)
+  const setNavHidden = useUiStore((s) => s.setNavHidden)
+  const lastScrollY = useRef(0)
 
   useEffect(() => {
     if (meta && Number.isFinite(chapterNum) && chapterNum > 0) {
@@ -38,6 +42,30 @@ export function BibleReadingPage() {
     setSelected(null)
     setEditingNote(false)
   }, [book, chapterNum])
+
+  useEffect(() => {
+    lastScrollY.current = window.scrollY
+    function onScroll() {
+      const y = window.scrollY
+      const delta = y - lastScrollY.current
+      if (Math.abs(delta) < 8) return
+      if (delta > 0 && y > 80) {
+        setChromeHidden(true)
+        setNavHidden(true)
+      } else if (delta < 0) {
+        setChromeHidden(false)
+        setNavHidden(false)
+      }
+      lastScrollY.current = y
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      setNavHidden(false)
+    }
+  }, [setNavHidden])
+
+  const chromeVisible = !chromeHidden || selected !== null
 
   if (!meta || !Number.isFinite(chapterNum) || chapterNum < 1) {
     return <Navigate to="/biblia" replace />
@@ -78,7 +106,11 @@ export function BibleReadingPage() {
 
   return (
     <div className="pb-28">
-      <div className="sticky top-0 z-30 flex items-center gap-2 bg-bg px-4 pb-2 pt-4">
+      <div
+        className={`sticky top-0 z-30 flex items-center gap-2 bg-bg px-4 pb-2 pt-4 transition-all duration-300 ease-out ${
+          chromeVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+        }`}
+      >
         <button
           onClick={() => navigate('/biblia')}
           aria-label="Voltar"
@@ -194,7 +226,12 @@ export function BibleReadingPage() {
         </div>
       )}
 
-      <div className="fixed bottom-16 left-0 right-0 z-30 mx-auto max-w-md px-4 pb-3" style={{ display: selected !== null ? 'none' : undefined }}>
+      <div
+        className={`fixed bottom-16 left-0 right-0 z-30 mx-auto max-w-md px-4 pb-3 transition-all duration-300 ease-out ${
+          chromeHidden && selected === null ? 'translate-y-24 opacity-0' : 'translate-y-0 opacity-100'
+        }`}
+        style={{ display: selected !== null ? 'none' : undefined }}
+      >
         <div className="flex items-center gap-1 rounded-full border border-border bg-surface p-1.5 shadow-lg">
           {hasPrev ? (
             <Link
